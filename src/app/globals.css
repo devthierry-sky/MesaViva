@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8f6f0;
+  --foreground: #202923;
+  --brand-forest: #234b39;
+  --brand-terracotta: #315f42;
+  --brand-cream: #f4f6f2;
+  --brand-muted: #687168;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  color: #fff;
+  background: #315f42;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
+}
+
+@media (min-width: 1280px) {
+  html { scroll-padding-top: 4.25rem; }
+}
+
+@keyframes mesa-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes logo-intro-out {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+.marquee-track {
+  animation: mesa-marquee 38s linear infinite;
+}
+
+[data-reveal="hidden"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 650ms cubic-bezier(.2,.7,.2,1) var(--reveal-delay, 0ms), transform 650ms cubic-bezier(.2,.7,.2,1) var(--reveal-delay, 0ms);
+}
+
+[data-reveal="visible"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal="hidden"], [data-reveal="visible"] { opacity: 1; transform: none; transition: none; }
+  .marquee-track { animation: none; }
+}
